@@ -1,13 +1,15 @@
 """Minting the RS256 tokens the MCP server verifies.
 
-One fresh token per MCP call carrying:
+One fresh token per MCP call (signing costs under a millisecond, so there is nothing
+worth caching), carrying:
+
     sub    the API user, which the MCP server logs as ``caller=``
     scope  only what this call needs (least privilege), plus salary:read if the user has it
     jti    this API request's id, which the MCP server logs as ``jti=``
-    exp    short-lived (AUTH_TOKEN_TTL_SECONDS, default 30 seconds)
+    exp    short-lived (AUTH_TOKEN_TTL_SECONDS, default 5 minutes)
 """
 
-
+from __future__ import annotations
 
 import time
 from pathlib import Path

@@ -1,6 +1,6 @@
 """Scopes and roles."""
 
-
+from __future__ import annotations
 
 SCOPE_EMPLOYEES_READ = "employees:read"
 SCOPE_DEPARTMENTS_READ = "departments:read"

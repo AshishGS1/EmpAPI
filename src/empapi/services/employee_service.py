@@ -1,6 +1,6 @@
 """Employee use cases: validate early, call the MCP tool, shape the result."""
 
-
+from __future__ import annotations
 
 from empapi.deps import AuthenticatedUser
 from empapi.exceptions import InvalidRequestError

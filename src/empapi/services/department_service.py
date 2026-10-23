@@ -1,6 +1,6 @@
 """Department use cases."""
 
-
+from __future__ import annotations
 
 from empapi.deps import AuthenticatedUser
 from empapi.exceptions import UpstreamError
@@ -35,10 +35,12 @@ async def all_departments(
 async def department_by_id(
     gateway: McpGateway, user: AuthenticatedUser, department_id: int
 ) -> DepartmentStatistics:
+    """A missing department is the MCP server's DEPARTMENT_NOT_FOUND, passed through as
+    404. When an id is given the MCP server returns that department even if inactive."""
     result = await _fetch(gateway, user, {"department_id": department_id})
     if len(result.departments) != 1:
         raise UpstreamError(
-            "The service returned an unexpected response",
+            "The employee service returned an unexpected response",
             code="UPSTREAM_CONTRACT_ERROR",
         )
     return result.departments[0]

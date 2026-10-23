@@ -1,6 +1,6 @@
 """Employee response models (what this API returns)."""
 
-
+from __future__ import annotations
 
 from datetime import date
 

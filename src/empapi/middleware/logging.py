@@ -1,6 +1,12 @@
-"""Request logging middleware: one CALLED line and one OK/FAILED line per request."""
+"""Request logging middleware: one CALLED line and one OK/FAILED line per request.
 
+Written as plain ASGI middleware (not Starlette's BaseHTTPMiddleware) so the
+ContextVars it sets reach the endpoint and everything that runs under it.
+Each response gets an ``X-Request-ID`` header. A caller-supplied ``X-Request-ID`` is
+honoured if it is short and plain, so a request can be followed across systems.
+"""
 
+from __future__ import annotations
 
 import re
 import time
@@ -22,6 +28,7 @@ from empapi.utils.logging_config import get_logger, request_id_var
 logger = get_logger("http")
 
 REQUEST_ID_HEADER = "X-Request-ID"
+# Also the shape the MCP server accepts for a token's jti (1-64 of these characters)
 _ACCEPTED_REQUEST_ID = re.compile(r"[A-Za-z0-9._-]{8,64}")
 
 

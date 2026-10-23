@@ -1,5 +1,7 @@
 """/departments: statistics for all departments, or for one."""
 
+from __future__ import annotations
+
 from fastapi import APIRouter, Depends, Path, Query
 
 from empapi.deps import AuthenticatedUser, get_gateway, require_scopes

@@ -3,7 +3,7 @@
 These helpers only log; the middleware calls them once per request stage.
 """
 
-
+from __future__ import annotations
 
 import logging
 from typing import Any, Mapping

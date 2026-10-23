@@ -1,6 +1,6 @@
 """Oracle connection pool for the api_users table (python-oracledb, thin mode, async)."""
 
-
+from __future__ import annotations
 
 from contextlib import asynccontextmanager
 from typing import AsyncIterator

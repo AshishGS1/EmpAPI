@@ -1,10 +1,12 @@
 """API key format and hashing.
 
 A key is ``emp_`` plus 32 random bytes (urlsafe base64), shown to its owner once, at
-creation. Only its SHA-256 is stored. A plain fast hash is right here.
+creation. Only its SHA-256 is stored. A plain fast hash is right here (unlike for
+passwords): the key is 256 bits of randomness, so there is nothing to brute-force,
+and a slow hash would just add latency to every request.
 """
 
-
+from __future__ import annotations
 
 import hashlib
 import re

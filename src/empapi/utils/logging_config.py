@@ -6,7 +6,7 @@ filter stamps that id on every record logged meanwhile, so one request can be tr
 across all its log lines (the same id is sent to the MCP server as the token's jti).
 """
 
-
+from __future__ import annotations
 
 import json
 import logging

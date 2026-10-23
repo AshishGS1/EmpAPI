@@ -5,7 +5,7 @@ Each handler also records the code and message on the RequestInfo, so the loggin
 middleware's single FAILED line carries them.
 """
 
-
+from __future__ import annotations
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
