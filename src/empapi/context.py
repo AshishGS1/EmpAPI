@@ -5,7 +5,7 @@ ContextVar. Later stages fill it in (who the user is, which error code was retur
 how long MCP took), so the single log line written at the end can carry all of it.
 """
 
-from __future__ import annotations
+
 
 from contextvars import ContextVar
 from dataclasses import dataclass

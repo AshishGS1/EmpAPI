@@ -1,6 +1,6 @@
 """/employees: details for one employee, and search."""
 
-from __future__ import annotations
+
 
 from fastapi import APIRouter, Depends, Path, Query
 

@@ -1,6 +1,6 @@
 """Department use cases."""
 
-from __future__ import annotations
+
 
 from empapi.deps import AuthenticatedUser
 from empapi.exceptions import UpstreamError

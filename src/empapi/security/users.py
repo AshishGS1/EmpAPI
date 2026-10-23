@@ -1,6 +1,6 @@
 """API users: the record, the store interface, and a short-lived lookup cache."""
 
-from __future__ import annotations
+
 
 import time
 from dataclasses import dataclass

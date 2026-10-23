@@ -4,7 +4,7 @@ The MCP server formats every deliberate error as ``[404 EMPLOYEE_NOT_FOUND] mess
 (status, code, message), so the status is read from the text. 
 """
 
-from __future__ import annotations
+
 
 import re
 from dataclasses import dataclass

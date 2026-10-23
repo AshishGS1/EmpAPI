@@ -6,7 +6,7 @@ passwords): the key is 256 bits of randomness, so there is nothing to brute-forc
 and a slow hash would just add latency to every request.
 """
 
-from __future__ import annotations
+
 
 import hashlib
 import re

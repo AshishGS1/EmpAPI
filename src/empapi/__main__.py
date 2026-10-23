@@ -1,7 +1,3 @@
-from empapi.app import main
-
-from __future__ import annotations
-
 import sys
 
 import uvicorn

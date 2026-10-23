@@ -19,7 +19,7 @@ Where each error is raised:
     McpToolError, Upstream*Error       mcp/
 """
 
-from __future__ import annotations
+
 
 from http import HTTPStatus
 from typing import Any, Mapping

@@ -4,7 +4,7 @@
     python scripts/manage_users.py list
 """
 
-from __future__ import annotations
+
 
 import argparse
 import asyncio

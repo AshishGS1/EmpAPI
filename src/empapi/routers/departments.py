@@ -1,6 +1,6 @@
 """/departments: statistics for all departments, or for one."""
 
-from __future__ import annotations
+
 
 from fastapi import APIRouter, Depends, Path, Query
 

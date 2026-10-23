@@ -6,7 +6,7 @@ Each response gets an ``X-Request-ID`` header. A caller-supplied ``X-Request-ID`
 honoured if it is short and plain, so a request can be followed across systems.
 """
 
-from __future__ import annotations
+
 
 import re
 import time

@@ -7,7 +7,7 @@ git). Copy keys/public.pem to the MCP server (its AUTH_PUBLIC_KEY_PATH). In prod
 keep the private key in a secret store instead of on disk.
 """
 
-from __future__ import annotations
+
 
 import argparse
 import os

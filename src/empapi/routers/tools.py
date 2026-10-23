@@ -1,6 +1,6 @@
 """/tools: what the MCP server offers, as discovered over the MCP protocol."""
 
-from __future__ import annotations
+
 
 from fastapi import APIRouter, Depends
 

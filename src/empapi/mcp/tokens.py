@@ -9,7 +9,7 @@ worth caching), carrying:
     exp    short-lived (AUTH_TOKEN_TTL_SECONDS, default 5 minutes)
 """
 
-from __future__ import annotations
+
 
 import time
 from pathlib import Path

@@ -1,6 +1,6 @@
 """Validate what MCP returned against our response model."""
 
-from __future__ import annotations
+
 
 from typing import Any, TypeVar
 

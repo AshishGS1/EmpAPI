@@ -6,7 +6,7 @@ ContextBearerAuth reads it when the HTTP request is made, so concurrent users ne
 see each other's token. 
 """
 
-from __future__ import annotations
+
 
 import asyncio
 import contextvars
