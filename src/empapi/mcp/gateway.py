@@ -10,7 +10,6 @@ see each other's token.
 
 import asyncio
 import contextvars
-import time
 from dataclasses import dataclass
 from typing import Any, Iterable
 
@@ -78,7 +77,6 @@ class McpGateway:
         if client is not None:
             await _close_quietly(client)
 
-    @property
     def tools(self) -> list[ToolInfo]:
         return list(self._tools)
 

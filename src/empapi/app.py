@@ -51,7 +51,6 @@ def create_app() -> FastAPI:
                 await store.close()
             raise
 
-        app.state.settings = settings
         app.state.user_store = store
         app.state.gateway = mcp_gateway
         logger.info("EmpAPI ready", extra={"mcp_url": settings.mcp_url})
