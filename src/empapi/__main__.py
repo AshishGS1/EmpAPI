@@ -1,6 +1,6 @@
 """``python -m empapi`` / ``empapi``: run the API with uvicorn."""
 
-from __future__ import annotations
+
 
 import sys
 

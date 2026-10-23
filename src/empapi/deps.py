@@ -6,7 +6,7 @@ Order of checks for an authenticated endpoint:
     3. role known, endpoint's scope held       -> else 403 (before any MCP call)
 """
 
-from __future__ import annotations
+
 
 from dataclasses import dataclass
 from typing import Callable

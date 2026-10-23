@@ -1,6 +1,6 @@
 """Oracle-backed store of API users (table ``api_users``, see ../EmpMCP/sql/03_api_users.sql)."""
 
-from __future__ import annotations
+
 
 import oracledb
 

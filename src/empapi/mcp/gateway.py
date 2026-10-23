@@ -6,7 +6,7 @@ ContextBearerAuth reads it when the HTTP request is made, so concurrent users ne
 see each other's token. 
 """
 
-from __future__ import annotations
+
 
 import asyncio
 import contextvars
@@ -83,7 +83,6 @@ class McpGateway:
         return list(self._tools)
 
     async def ping(self) -> bool:
-        """Is the MCP server reachable and answering?"""
         client = self._client
         if client is None:
             return False
@@ -103,11 +102,7 @@ class McpGateway:
         user_scopes: frozenset[str],
         required_scopes: Iterable[str],
     ) -> dict[str, Any]:
-        """Call one tool as ``user_id`` and return its structured result.
-
-        The token carries ``required_scopes`` (what this call needs) plus salary:read
-        if the user holds it, never the user's other scopes.
-        """
+        """Call one tool as ``user_id`` and return its structured result."""
         scopes = set(required_scopes)
         if SCOPE_SALARY_READ in user_scopes:
             scopes.add(SCOPE_SALARY_READ)
@@ -123,11 +118,10 @@ class McpGateway:
             raise to_api_error(tool, text)
         if not isinstance(result.structured_content, dict):
             logger.error("MCP tool returned no structured content", extra={"tool": tool})
-            raise UpstreamError("The employee service returned an unexpected response")
+            raise UpstreamError("The service returned an unexpected response")
         return result.structured_content
 
     async def _call_once(self, tool: str, arguments: dict[str, Any]):
-        """One attempt, any failure is reported to the caller."""
         client = self._client
         if client is None:
             raise UpstreamUnavailableError("The service is unavailable")

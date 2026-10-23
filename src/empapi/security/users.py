@@ -1,10 +1,10 @@
 """API users: the record, the store interface, and a short-lived lookup cache."""
 
-from __future__ import annotations
+
 
 import time
 from dataclasses import dataclass
-from typing import Callable, Protocol
+from typing import Protocol
 
 
 @dataclass(frozen=True)
@@ -25,25 +25,19 @@ class UserStore(Protocol):
 
 
 class CachedUserStore:
-    """Wraps a store with a TTL cache, so a request does not hit Oracle every time.
-
-    Misses are cached too, which stops a flood of random keys from reaching the
-    database. The price: a key that is disabled (or newly created) is only noticed
-    after ``ttl`` seconds. Set USER_CACHE_TTL_SECONDS=0 for no caching.
-    """
+    """Wraps a store with a TTL cache, so a request does not hit Oracle every time."""
 
     def __init__(
         self,
         store: UserStore,
         ttl_seconds: float,
         *,
-        max_entries: int = 10_000,
-        clock: Callable[[], float] = time.monotonic,
+        max_entries: int = 10,
     ) -> None:
         self._store = store
         self._ttl = ttl_seconds
         self._max = max_entries
-        self._clock = clock
+        self._clock = time.monotonic
         self._entries: dict[str, tuple[float, UserRecord | None]] = {}
 
     async def get_by_key_hash(self, key_hash: str) -> UserRecord | None:

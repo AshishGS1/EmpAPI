@@ -9,9 +9,9 @@ ERROR_RESPONSES = {
     404: {"model": ErrorResponse, "description": "Not found"},
     422: {"model": ErrorResponse, "description": "Invalid parameters"},
     429: {"model": ErrorResponse, "description": "Rate limited"},
-    502: {"model": ErrorResponse, "description": "The employee service failed"},
-    503: {"model": ErrorResponse, "description": "The employee service is unavailable"},
-    504: {"model": ErrorResponse, "description": "The employee service timed out"},
+    502: {"model": ErrorResponse, "description": "The service failed"},
+    503: {"model": ErrorResponse, "description": "The service is unavailable"},
+    504: {"model": ErrorResponse, "description": "The service timed out"},
 }
 
 #employees

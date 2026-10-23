@@ -1,6 +1,6 @@
 """Environment-driven configuration (pydantic-settings)."""
 
-from __future__ import annotations
+
 
 from functools import lru_cache
 
@@ -47,7 +47,6 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    """Load settings once; turn validation failures into a ConfigurationError."""
     try:
         return Settings()  # type: ignore[call-arg]
     except ValidationError as exc:

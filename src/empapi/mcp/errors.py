@@ -4,7 +4,7 @@ The MCP server formats every deliberate error as ``[404 EMPLOYEE_NOT_FOUND] mess
 (status, code, message), so the status is read from the text. 
 """
 
-from __future__ import annotations
+
 
 import re
 from dataclasses import dataclass
@@ -40,7 +40,7 @@ def to_api_error(tool: str, text: str) -> ApiError:
             "MCP tool failed with an unrecognised message",
             extra={"tool": tool, "mcp_text": text[:300]},
         )
-        return UpstreamError("The employee service failed to process the request")
+        return UpstreamError("The service failed to process the request")
 
     if info.status == 401:
         logger.error(
@@ -48,7 +48,7 @@ def to_api_error(tool: str, text: str) -> ApiError:
             extra={"tool": tool, "mcp_code": info.code},
         )
         return UpstreamError(
-            "The employee service could not authenticate this service",
+            "The service could not authenticate this service",
             code="UPSTREAM_AUTH_ERROR",
         )
 
@@ -65,4 +65,4 @@ def to_api_error(tool: str, text: str) -> ApiError:
         "MCP tool failed with a server error",
         extra={"tool": tool, "mcp_status": info.status, "mcp_code": info.code},
     )
-    return UpstreamError("The employee service failed to process the request")
+    return UpstreamError("The service failed to process the request")

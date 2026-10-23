@@ -2,9 +2,11 @@
 
     python scripts/manage_users.py create --user-id alice --role hr
     python scripts/manage_users.py list
+    python scripts/manage_users.py disable --user-id alice
+    python scripts/manage_users.py enable  --user-id alice
 """
 
-from __future__ import annotations
+
 
 import argparse
 import asyncio

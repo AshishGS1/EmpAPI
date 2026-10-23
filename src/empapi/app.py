@@ -1,13 +1,6 @@
-"""App factory and lifespan.
+"""App factory and lifespan."""
 
-Startup order, each step failing fast with a clear message:
-    1. logging
-    2. signing key (a missing or weak key stops the app here)
-    3. Oracle pool for the API-user table
-    4. MCP client: connect, list_tools, check the expected tools exist
-"""
 
-from __future__ import annotations
 
 from contextlib import asynccontextmanager
 

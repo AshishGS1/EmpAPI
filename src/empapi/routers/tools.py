@@ -1,6 +1,6 @@
 """/tools: what the MCP server offers, as discovered over the MCP protocol."""
 
-from __future__ import annotations
+
 
 from fastapi import APIRouter, Depends
 
@@ -21,8 +21,8 @@ router = APIRouter(
     "",
     response_model=ToolList,
     summary="List the MCP tools",
-    description="Tools discovered with list_tools when the API connected to the MCP server "
-    "(refreshed on every reconnect). Any authenticated user may read it.",
+    description="Tools discovered with list_tools when the API connected to the MCP server. "
+    "Any authenticated user may read it.",
 )
 async def list_tools(gateway: McpGateway = Depends(get_gateway)) -> ToolList:
     tools = [ToolSchema(name=t.name, description=t.description, input_schema=t.input_schema)

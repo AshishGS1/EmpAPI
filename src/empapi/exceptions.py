@@ -2,24 +2,9 @@
 
 Every error the API raises on purpose is an ``ApiError`` carrying a stable ``code``
 and an HTTP ``status``; one handler (handlers.py) turns it into the JSON error body
-
-    {"error": {"code": "EMPLOYEE_NOT_FOUND", "message": "...", "request_id": "..."}}
-
-Errors that come back from the MCP server keep the MCP code and status
-(see mcp/errors.py for the mapping rules).
-
-Where each error is raised:
-    ConfigurationError                 config.py, mcp/tokens.py (startup)
-    AuthenticationRequiredError,
-    InvalidApiKeyError                 deps.py
-    PermissionDeniedError              deps.py
-    RateLimitedError                   security/rate_limit.py
-    InvalidRequestError                services/
-    UserStoreError                     db/
-    McpToolError, Upstream*Error       mcp/
 """
 
-from __future__ import annotations
+
 
 from http import HTTPStatus
 from typing import Any, Mapping
@@ -52,7 +37,7 @@ class ConfigurationError(ApiError):
     code = "CONFIGURATION_ERROR"
 
 
-# --- the caller's side ---------------------------------------------------------------
+# caller's dependenies
 class AuthenticationRequiredError(ApiError):
     code = "AUTHENTICATION_REQUIRED"
     status = HTTPStatus.UNAUTHORIZED
@@ -63,8 +48,6 @@ class AuthenticationRequiredError(ApiError):
 
 
 class InvalidApiKeyError(AuthenticationRequiredError):
-    # One message for unknown, malformed, and disabled keys, so a caller cannot tell
-    # which of them it hit.
     code = "INVALID_API_KEY"
 
     def __init__(self, **kw):

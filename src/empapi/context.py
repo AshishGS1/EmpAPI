@@ -1,11 +1,6 @@
-"""Per-request state shared by the logging middleware, dependencies and handlers.
+"""Per-request state shared by the logging middleware, dependencies and handlers"""
 
-The middleware creates one ``RequestInfo`` per request and publishes it in a
-ContextVar. Later stages fill it in (who the user is, which error code was returned,
-how long MCP took), so the single log line written at the end can carry all of it.
-"""
 
-from __future__ import annotations
 
 from contextvars import ContextVar
 from dataclasses import dataclass
