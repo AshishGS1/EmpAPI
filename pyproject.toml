@@ -1,0 +1,27 @@
+[project]
+name = "empapi"
+version = "0.1.0"
+description = "EmpAPI: FastAPI gateway that calls the EmpMCP server over the MCP protocol"
+requires-python = ">=3.11"
+dependencies = [
+    "cryptography>=42",
+    "fastapi>=0.115",
+    # Pinned on purpose: the shared client with a per-call token relies on how this
+    # version propagates context. Re-run tests/contract/test_concurrency.py to upgrade.
+    "fastmcp==4.1.0",
+    "joserfc>=1.0",
+    "oracledb>=2.0",
+    "pydantic>=2.5",
+    "pydantic-settings>=2.2",
+    "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+# Contract tests also need the MCP server importable: pip install -e ../empmcp-server
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+empapi = "empapi.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
