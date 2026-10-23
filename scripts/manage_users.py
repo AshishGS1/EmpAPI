@@ -28,13 +28,9 @@ async def run(args: argparse.Namespace) -> int:
                 print(f"{u.user_id:<24} {u.role:<10} {str(u.is_active):<7} ...{u.key_hint or ''}")
             return 0
 
-        if args.command in ("create", "rotate"):
+        if args.command == "create":
             key = generate_api_key()
-            if args.command == "create":
-                await store.create_user(args.user_id, args.role, hash_api_key(key), key_hint(key))
-            elif not await store.rotate_key(args.user_id, hash_api_key(key), key_hint(key)):
-                print(f"No such user: {args.user_id}", file=sys.stderr)
-                return 1
+            await store.create_user(args.user_id, args.role, hash_api_key(key), key_hint(key))
             print(key)
             print(f"# {args.command}d {args.user_id}; this key is shown only once", file=sys.stderr)
             return 0
@@ -56,6 +52,8 @@ def main() -> None:
     create = commands.add_parser("create")
     create.add_argument("--user-id", required=True)
     create.add_argument("--role", required=True, choices=ROLES)
+    for name in ("disable", "enable"):
+        commands.add_parser(name).add_argument("--user-id", required=True)
     args = parser.parse_args()
     try:
         sys.exit(asyncio.run(run(args)))

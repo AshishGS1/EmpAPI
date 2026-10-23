@@ -115,7 +115,7 @@ class McpGateway:
 
         ctx_token = _call_token.set(token)
         try:
-            result = await self._call_tool(tool, arguments)
+            result = await self._call_once(tool, arguments)
         finally:
             _call_token.reset(ctx_token)
         if result.is_error:
@@ -126,7 +126,7 @@ class McpGateway:
             raise UpstreamError("The employee service returned an unexpected response")
         return result.structured_content
 
-    async def _call_tool(self, tool: str, arguments: dict[str, Any]):
+    async def _call_once(self, tool: str, arguments: dict[str, Any]):
         """One attempt, any failure is reported to the caller."""
         client = self._client
         if client is None:

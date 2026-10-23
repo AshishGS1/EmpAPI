@@ -61,6 +61,12 @@ class OracleUserStore:
         except _Duplicate as exc:
             raise InvalidRequestError(f"User '{user_id}' already exists") from exc
 
+    async def set_active(self, user_id: str, active: bool) -> bool:
+        return await self._execute(
+            "UPDATE api_users SET is_active = :active WHERE user_id = :user_id",
+            {"user_id": user_id, "active": int(active)},
+        )
+
     # helpers
     async def _query(self, sql: str, params: dict | None = None) -> list[tuple]:
         async with self._pool.acquire() as connection:
