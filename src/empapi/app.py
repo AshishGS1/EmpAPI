@@ -5,7 +5,13 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+import sys
 
+import uvicorn
+
+from empapi.config import get_settings
+from empapi.exceptions import ApiError
+from empapi.utils.logging_config import configure_logging, get_logger
 from empapi.config import get_settings
 from empapi.exceptions import ApiError
 from empapi.handlers import register_exception_handlers
@@ -69,3 +75,23 @@ def create_app() -> FastAPI:
     app.include_router(tools.router)
     app.include_router(health.router)
     return app
+
+
+def main() -> None:
+    try:
+        settings = get_settings()
+    except ApiError as exc:
+        configure_logging()
+        get_logger("app").critical(
+            "Cannot start: [%s] %s", exc.code, exc.message,
+            extra={"error_code": exc.code, "details": exc.details},
+        )
+        sys.exit(1)
+
+    uvicorn.run(
+        "empapi.app:create_app",
+        factory=True,
+        host=settings.api_host,
+        port=settings.api_port,
+        access_log=False,  # the request-logging middleware writes the access line
+    )
