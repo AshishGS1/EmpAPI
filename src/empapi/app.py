@@ -68,7 +68,7 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
     register_exception_handlers(app)
-    app.add_middleware(RequestLoggingMiddleware)  # outermost: sees every request
+    app.add_middleware(RequestLoggingMiddleware)
     app.include_router(employees.router)
     app.include_router(departments.router)
     app.include_router(tools.router)

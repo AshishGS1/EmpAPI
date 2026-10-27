@@ -11,7 +11,7 @@ from empapi.models.common import ToolList, ToolSchema
 
 router = APIRouter(
     prefix="/tools",
-    tags=["tools"],
+    tags=["list tools"],
     dependencies=[Depends(get_current_user)],
     responses=ERROR_RESPONSES,
 )

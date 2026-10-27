@@ -22,6 +22,3 @@ dev = ["pytest>=8", "pytest-asyncio>=0.23"]
 
 [project.scripts]
 empapi = "empapi.__main__:main"
-
-[tool.setuptools.packages.find]
-where = ["src"]

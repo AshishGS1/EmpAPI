@@ -23,7 +23,7 @@ def main() -> None:
         factory=True,
         host=settings.api_host,
         port=settings.api_port,
-        access_log=False,  # the request-logging middleware writes the access line
+        access_log=False,
     )
 
 

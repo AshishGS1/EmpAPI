@@ -1,10 +1,4 @@
-"""The MCP gateway: one shared MCP client, with the caller's token chosen per call.
-
-Why shared: opening a client per request costs ~87 ms (connect + MCP handshake) against
-~13 ms for a warm shared one. Why safe: every request sets its token in a ContextVar and
-ContextBearerAuth reads it when the HTTP request is made, so concurrent users never
-see each other's token. 
-"""
+"""The MCP gateway: one shared MCP client, with the caller's token chosen per call."""
 
 
 
@@ -81,7 +75,6 @@ class McpGateway:
         return list(self._tools)
 
     async def ping(self) -> bool:
-        """Is the MCP server reachable and answering?"""
         client = self._client
         if client is None:
             return False
@@ -191,7 +184,7 @@ class McpGateway:
 async def _close_quietly(client: Client) -> None:
     try:
         await asyncio.wait_for(client.close(), 2)
-    except BaseException as exc:  # a dead connection often fails to close cleanly
+    except BaseException as exc:
         if isinstance(exc, asyncio.CancelledError):
             raise
         logger.debug("Ignored error while closing MCP client: %s", type(exc).__name__)
